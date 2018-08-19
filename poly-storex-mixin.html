@@ -1,0 +1,56 @@
+<script>
+  PolyStorexMixin = (superClass, source) => class extends superClass {
+    static get properties() {
+      return {
+        src: {
+          type: String,
+          value: ''
+        },
+        _unsubscribe: {
+          type: Object,
+          value: function () {
+            return;
+          }
+        },
+        state: {
+          type: Object,
+          value: {}
+        },
+        mutations: {
+          type: Object,
+          value: {}
+        }
+      }
+    }
+    connectedCallback () {
+      const unsub = gs.subscribe(this._stateToProps.bind(this));
+      this.set('_unsubscribe', unsub);
+      this.ready();
+    }
+    disconnectedCallback () {
+      this._unsubscribe();
+    }
+    _stateToProps (state) {
+      const parts = state.path.split('.');
+      const path = (parts.length > 1)
+        ? 'state.' + parts.slice(1, parts.length).join('.')
+        : 'state';
+
+      if (typeof  state.value === 'object') {
+        const current = this.get(path);
+        this.set(path, Object.assign({}, current, state.value));
+      } else {
+        this.set(path, state.value);
+      }
+    }
+    commit (mutation, value, combiner) {
+      gs.mutations = this.mutations;
+      gs.commit(mutation, value, combiner, source);
+    }
+    combinersMutations (mutations) {
+      this.set('mutations', mutations);
+      gs.mutations = this.mutations;
+      gs.combinersMutations(mutations);
+    }
+  }
+</script>
