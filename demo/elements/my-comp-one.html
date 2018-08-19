@@ -1,0 +1,51 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../poly-storex-mixin.html">
+
+<dom-module id="my-comp-one">
+    <template>
+        <template is="dom-if" if="{{state.visibility.origin}}">
+            <div>
+                <h4>{{title}}</h4>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+            </div>
+        </template>
+    </template>
+    <script>
+      /**
+       * `my-comp-one`
+       * component example
+       *
+       * @customElement
+       * @polymer
+       * @demo demo/index.html
+       */
+      class MyCompOne extends PolyStorexMixin(Polymer.Element, 'my-comp-two') {
+        static get is() { return 'my-comp-one'; }
+        static get properties () {
+          return {
+            title: {
+              type: String,
+              value: 'Origin'
+            }
+          }
+        }
+        static get observers () {
+          return [
+            '_visibleHandler(state.visibility.origin)'
+          ]
+        }
+        connectedCallback () {
+          super.connectedCallback();
+        }
+        _visibleHandler (origin) {
+          if (origin) {
+            this.mutations = GenericMutations;
+            this.commit('updateNextVisible', { next: 'receiver' });
+          }
+        }
+      }
+      window.customElements.define(MyCompOne.is, MyCompOne);
+    </script>
+</dom-module>
