@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../poly-storex-mixin.html">
+
+<dom-module id="main-component">
+  <template>
+    <h4>{{state.main.title}}</h4>
+    <label for="changeHeaderTitle">Change title of header component</label>
+    <input type="text" value="{{title::input}}" name="changeHeaderTitle">
+  </template>
+  <script>
+    /**
+     * `header-component`
+     * component example
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class MainComponent extends PolyStorexMixin(Polymer.Element, 'main-component') {
+      static get is() { return 'main-component'; }
+      static get properties () {
+        return {
+          title: {
+            type: String,
+            value: '',
+            observer: '_onUpdateTitle'
+          }
+        }
+      }
+      _onUpdateTitle (value) {
+        this.mutations = {
+          changeHeaderTitle (state, payload) {
+            state.dispatch({ title: payload.title }, 'main.header')
+          }
+        }
+        this.commit('changeHeaderTitle', { title: value });
+      }
+    }
+    window.customElements.define(MainComponent.is, MainComponent);
+  </script>
+</dom-module>

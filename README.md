@@ -149,6 +149,23 @@ this.commit('changeTitle',
             'mainMutations');
 </script>
 ```
+
+## Demo inline
+<!--
+```
+<custom-element-demo>
+  <template>
+    <link rel="import" href="./demo/elements/header-component.html">
+    <link rel="import" href="./demo/elements/main-component.html">
+    <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<header-compoent></header-compoent>
+<main-component></main-component>
+```
 ## Contributing
 
 1. Fork it!
