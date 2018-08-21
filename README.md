@@ -79,6 +79,76 @@ And finally in the others components where you want to share the states, just bi
 ```
 Note: remember that this is the basic example below there is more examples with more options.
 
+### Mutations with payload
+When you want to change any state with a some structure and some values, there is the payload param:
+```js
+this.mutations = {
+  changeTitle (state, payload) {
+    state.dispatch({
+      title: payload.title
+    })
+  }
+}
+this.commit('changeTitle', { title: 'My new title' });
+```
+
+### Mutations with a path
+Also there is a way to change any state with a some path, this help us to apply a change in a sub-property of the state object:
+```js
+// suppose that our title property is inside of state.main.
+this.mutations = {
+  changeSubs (state, payload) {
+    state.dispatch({ title: payload.title }, 'main');
+  },
+  // in this case our prop is inside of state.main.header
+  changeSubsHeader (state, payload) {
+    state.dispatch({ title: payload.title }, 'main.header');
+  }
+}
+this.commit('changeSubs', { title: 'My subtitle' });
+```
+
+### Mutations with combiners
+When you have many mutations functions is better to have it in separated files and when you want use all in a single object, to do this, there is the combiner option:
+
+generic-mutations.js
+```js
+const genericMutations = {
+  initStates (state) {
+    state.dispatch({ title: 'Default' })
+  }
+}
+```
+headers-mutations.js
+```js
+const headerMutations = {
+  changeTitle (state, payload) {
+    state.dispatch({ title: payload.title }, 'main.header')
+  }
+}
+```
+main-mutations.js
+```js
+const mainMutations = {
+  changeTitle (state, payload) {
+    state.dispatch({ title: payload.title }, 'main')
+  }
+}
+```
+my-app.html
+```html
+<script src="generic-mutations.js"></script>
+<script src="headers-mutations.js"></script>
+<script src="main-mutations.js"></script>
+<script>
+this.combinersMutations({ genericMutations, 
+                          headersMutations, 
+                          mainMutations })
+this.commit('changeTitle', 
+            { title: 'My new title' }, 
+            'mainMutations');
+</script>
+```
 ## Contributing
 
 1. Fork it!
