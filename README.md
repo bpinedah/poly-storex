@@ -151,7 +151,6 @@ this.commit('changeTitle',
 ```
 
 ## Demo inline
-<!--
 ```
 <custom-element-demo>
   <template>
@@ -161,7 +160,6 @@ this.commit('changeTitle',
   </template>
 </custom-element-demo>
 ```
--->
 ```html
 <header-compoent></header-compoent>
 <main-component></main-component>
