@@ -159,7 +159,9 @@ this.commit('changeTitle',
     <link rel="import" href="./poly-storex.html">
     <link rel="import" href="./demo/elements/header-component.html">
     <link rel="import" href="./demo/elements/main-component.html">
-    <next-code-block></next-code-block>
+    <dom-bind>
+        <next-code-block></next-code-block>
+    </dom-bind>
   </template>
 </custom-element-demo>
 ```
