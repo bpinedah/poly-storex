@@ -155,6 +155,7 @@ this.commit('changeTitle',
 ```
 <custom-element-demo>
   <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="./demo/elements/header-component.html">
     <link rel="import" href="./demo/elements/main-component.html">
     <next-code-block></next-code-block>
