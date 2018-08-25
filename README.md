@@ -149,28 +149,6 @@ this.commit('changeTitle',
             'mainMutations');
 </script>
 ```
-
-## Demo inline
-<!--
-```
-<custom-element-demo>
-  <template>
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="poly-storex.html">
-    <link rel="import" href="./demo/elements/header-component.html">
-    <link rel="import" href="./demo/elements/main-component.html">
-    <dom-bind>
-        <next-code-block></next-code-block>
-    </dom-bind>
-  </template>
-</custom-element-demo>
-```
--->
-```html
-<poly-storex></poly-storex>
-<header-compoent></header-compoent>
-<main-component></main-component>
-```
 ## Contributing
 
 1. Fork it!
@@ -181,12 +159,15 @@ this.commit('changeTitle',
 
 ## History
 
-TODO: Write history
+This component was developed while a team seen their luck on the floor when they was using an architecture events based and when they turned around, they have one fucking events bunch.
+
+So, we had to look for other architecture based on the State management pattern, like Redux on React and Vuex on VueJs.
+
+That's all
 
 ## Credits
-
-TODO: Write credits
+Special thanks to Eduardo Mosqueda (Edu) for his mental force contribution.
 
 ## License
 
-TODO: Write license
+GNU
